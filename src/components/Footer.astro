@@ -1,0 +1,15 @@
+---
+import { SITE_AUTHOR } from "../config";
+const today = new Date();
+---
+
+<footer class="footer footer-center block mb-5 pt-10 text-sm text-base-content/70">
+  <div class="pb-2">
+    <span>&copy; {today.getFullYear()} {SITE_AUTHOR} (<span lang="ja">奥河 董馬</span>)</span>
+  </div>
+  <div class="inline text-xs">
+    Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
+    &middot;
+    <a href="https://astrofy-template.netlify.app/" target="_blank" rel="noopener noreferrer">Astrofy Template</a>
+  </div>
+</footer>

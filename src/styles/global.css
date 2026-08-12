@@ -1,0 +1,11 @@
+.time-line-container>div:last-child .education__time>.education__line {
+    display: none;
+}
+
+.list-disc li::marker {
+    color: oklch(var(--p));
+}
+
+a {
+    text-underline-offset: 3px;
+}

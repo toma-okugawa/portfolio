@@ -1,0 +1,36 @@
+---
+import SideBarFooter from "./SideBarFooter.astro";
+import SideBarMenu from "./SideBarMenu.astro";
+const { sideBarActiveItemID } = Astro.props;
+---
+
+<div class="drawer-side z-40">
+  <label for="my-drawer" class="drawer-overlay" aria-label="Close sidebar"></label>
+  <aside class="px-2 pt-2 h-auto min-h-full w-[19rem] bg-base-200 text-base-content flex flex-col">
+    <div class="w-fit mx-auto mt-6 mb-3">
+      <a href="/">
+        <div class="avatar block m-auto">
+          <div class="w-[8.5rem] ring ring-primary ring-offset-base-200 ring-offset-2 rounded-full">
+            <img
+              class="mask mask-circle"
+              width="300"
+              height="300"
+              src="/profile.webp"
+              alt="Portrait of Toma Okugawa"
+            />
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="text-center mb-5 px-4">
+      <div class="text-lg font-bold">Toma Okugawa</div>
+      <div class="text-sm text-base-content/70" lang="ja">奥河 董馬</div>
+      <div class="text-xs text-base-content/70 mt-2 leading-relaxed">
+        Department of Information Science and Technology,<br />
+        National Institute of Technology (KOSEN), Yuge College
+      </div>
+    </div>
+    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <SideBarFooter />
+  </aside>
+</div>

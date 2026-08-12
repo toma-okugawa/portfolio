@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+import Entry from "../components/cv/Entry.astro";
+---
+
+<BaseLayout title="Curriculum Vitae" sideBarActiveItemID="cv">
+  <div class="mb-5 mt-5">
+    <h1 class="text-3xl font-bold">Curriculum Vitae</h1>
+  </div>
+
+  <SectionTitle title="Profile" id="profile" />
+
+  <p class="mb-2 leading-relaxed max-w-[70ch]">
+    I am a student in the Department of Information Science and Technology at National Institute of Technology
+    (KOSEN), Yuge College. My research interests include pose estimation, motion analysis, self-directed learning
+    support systems, real-time feedback, and sports engineering. I have served as principal investigator of a
+    competitively funded research project under the AKATSUKI Project of the Ministry of Economy, Trade and
+    Industry, and my team received multiple awards at the Tongali Business Plan Contest 2026.
+  </p>
+
+  <SectionTitle title="Education" id="education" />
+
+  <div class="time-line-container grid gap-4 mb-2">
+    <TimeLineElement
+      title="National Institute of Technology (KOSEN), Yuge College"
+      subtitle="Apr 2024 – Present · Department of Information Science and Technology · Ehime, Japan"
+    />
+  </div>
+
+  <SectionTitle title="Research Interests" id="research-interests" />
+
+  <div class="flex flex-wrap gap-2 mb-2">
+    <span class="badge badge-outline badge-primary">Pose Estimation (姿勢推定)</span>
+    <span class="badge badge-outline badge-primary">Motion Analysis (動作解析)</span>
+    <span class="badge badge-outline badge-primary">Self-Directed Learning Support System (独習支援システム)</span>
+    <span class="badge badge-outline badge-primary">Real-Time Feedback (リアルタイムフィードバック)</span>
+    <span class="badge badge-outline badge-primary">Sports Engineering (スポーツ工学)</span>
+  </div>
+
+  <SectionTitle title="Research Areas" id="research-areas" />
+
+  <ul class="list-disc mx-6 mb-2 grid gap-1">
+    <li>Informatics — Human interfaces and interactions</li>
+    <li>Informatics — Perceptual information processing</li>
+    <li>Informatics — Intelligent informatics</li>
+  </ul>
+
+  <SectionTitle title="Research Projects" id="research-projects" />
+
+  <Entry
+    title="夜間環境に特化した360度視覚支援型移動ロボットの開発"
+    meta="AKATSUKI Project / LEADING EDGE Shikoku (Competitive Research Funds), Ministry of Economy, Trade and Industry — National Institute of Technology, Yuge College"
+    date="Aug 2025 – Jan 2026"
+    lang="ja"
+    badges={["Principal Investigator"]}
+  >
+    Development of a 360-degree vision-assisted mobile robot specialized for nighttime environments.
+  </Entry>
+
+  <SectionTitle title="Awards & Honors" id="awards" />
+
+  <Entry
+    title="Tongali Business Plan Contest 2026 (Finalist)"
+    meta="Tongali Project, Nagoya University / National Institute of Information and Communications Technology (NICT) — with Uryu Den and Keito Inoshita"
+    date="Jun 2026"
+    highlightBadges={[
+      "5th Place Tongali Award",
+      "NICT Award",
+      "Supporter Awards (Beyond Next Ventures Award / JR Central Award)",
+    ]}
+  />
+  <Entry
+    title="SusHi Tech Teen Challenge 2026 Semifinalist"
+    meta="SusHi Tech Tokyo 2026 Executive Committee"
+    date="Apr 2026"
+  />
+  <Entry
+    title="Fighting Spirit Award, The 36th KOSEN Programming Contest"
+    meta="Japan Association of Colleges of Technology — with Ukyo Okada, Kouki Fukuda, Toya Kimura, and Hurano Hirabayasi"
+    date="Oct 2025"
+  />
+  <Entry
+    title="Outstanding Presentation Award"
+    meta="Shikoku-section Joint Convention of the Institutes of Electrical and Related Engineers (SJCIEE) — with Tomonari Masuzaki and Takahiro Makiyama"
+    date="Sep 2025"
+  />
+  <Entry
+    title="Outstanding Student Award, The 12th Information Science and Technology Department Student Recognition"
+    meta="Information Science and Technology Department, National Institute of Technology, Yuge College"
+    date="Apr 2025"
+  />
+
+  <SectionTitle title="Certifications" id="certifications" />
+
+  <ul class="list-disc mx-6 mb-2 grid gap-1">
+    <li>Information Technology Passport Examination (ITパスポート)</li>
+  </ul>
+
+  <SectionTitle title="Professional Memberships" id="memberships" />
+
+  <Entry
+    title="The Institute of Electronics, Information and Communication Engineers (IEICE)"
+    date="Aug 2026 – Present"
+  />
+  <Entry title="Information Processing Society of Japan (IPSJ)" date="Jun 2025 – Present" />
+
+  <SectionTitle title="Media Coverage" id="media" />
+
+  <Entry
+    title="Tongaliビジネスプランコンテスト2026 結果報告"
+    meta="National Institute of Information and Communications Technology (NICT) — Web"
+    date="Jun 2026"
+    lang="ja"
+    links={[{ label: "Article", url: "https://www.nict.go.jp/venture/2026_tongali_report.html" }]}
+  />
+  <Entry
+    title="プログラミングを始めてわずか一年で研究者の道へ。現役高専生のディープテックと地方創生への挑戦。"
+    meta="KOSEN MONSTER (C-Style Inc.) — Web"
+    date="May 2026"
+    lang="ja"
+    links={[{ label: "Article", url: "https://kosen-monster.com/post/okugawa-toma" }]}
+  />
+  <Entry
+    title="弓削商船高専生、上島町内初のプログラミング教室起業「子どもたちをサポートしたい」"
+    meta="The Ehime Shimbun — Newspaper"
+    date="Mar 2026"
+    lang="ja"
+    links={[{ label: "Article", url: "https://www.ehime-np.co.jp/article/news202603270169" }]}
+  />
+
+  <SectionTitle title="Other Activities" id="others" />
+
+  <Entry
+    title="授業の課題だけで終わらせない！ －高専1・2年で 学外のチャンス を掴み取るロードマップ－"
+    meta="Document (PDF)"
+    date="Aug 2026"
+    lang="ja"
+    links={[{ label: "PDF", url: "https://researchmap.jp/t_okugawa/others/54540106/attachment_file.pdf" }]}
+  />
+</BaseLayout>

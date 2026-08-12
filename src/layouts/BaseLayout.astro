@@ -1,0 +1,43 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SideBar from "../components/SideBar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR, TRANSITION_API } from "../config";
+
+const {
+  image,
+  title,
+  description = SITE_DESCRIPTION,
+  includeSidebar = true,
+  sideBarActiveItemID,
+  ogType,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
+---
+
+<!doctype html>
+<html lang="en" data-theme="resume">
+  <head>
+    <BaseHead title={pageTitle} description={description} image={image} ogType={ogType} />
+    {TRANSITION_API && <ViewTransitions />}
+  </head>
+  <body>
+    <div class="bg-base-100 drawer lg:drawer-open">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content bg-base-100">
+        <Header title={SITE_AUTHOR} showMenuButton={includeSidebar} />
+        <div class="md:flex md:justify-center">
+          <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw] w-full">
+            <slot />
+          </main>
+        </div>
+        <Footer />
+      </div>
+      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+---
+export interface Props {
+  title: string;
+  meta?: string;
+  date?: string;
+  badges?: string[];
+  highlightBadges?: string[];
+  links?: { label: string; url: string }[];
+  url?: string;
+  lang?: string;
+}
+
+const { title, meta, date, badges = [], highlightBadges = [], links = [], url, lang } = Astro.props;
+---
+
+<article class="py-4 border-b border-base-300 last:border-b-0">
+  <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-6">
+    <h3 class="font-semibold leading-snug" lang={lang}>
+      {
+        url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+            {title}
+          </a>
+        ) : (
+          title
+        )
+      }
+    </h3>
+    {date && <div class="text-sm text-base-content/70 whitespace-nowrap mt-1 sm:mt-0 shrink-0">{date}</div>}
+  </div>
+  {meta && <p class="text-sm text-base-content/70 mt-1">{meta}</p>}
+  {
+    Astro.slots.has("default") && (
+      <div class="text-sm text-base-content/80 mt-1 leading-relaxed">
+        <slot />
+      </div>
+    )
+  }
+  {
+    (badges.length > 0 || highlightBadges.length > 0 || links.length > 0) && (
+      <div class="flex flex-wrap items-center gap-2 mt-2">
+        {highlightBadges.map((badge) => (
+          <span class="badge badge-primary badge-sm">{badge}</span>
+        ))}
+        {badges.map((badge) => (
+          <span class="badge badge-outline badge-primary badge-sm">{badge}</span>
+        ))}
+        {links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link link-primary link-hover text-xs font-medium"
+          >
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>
