@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import Entry from "../components/cv/Entry.astro";
+---
+
+<BaseLayout title="Publications" sideBarActiveItemID="publications">
+  <div class="mb-5 mt-5">
+    <h1 class="text-3xl font-bold">Publications</h1>
+    <p class="text-base-content/70 mt-2">
+      A complete list is also available on
+      <a
+        href="https://researchmap.jp/t_okugawa"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link link-primary">researchmap</a
+      >.
+    </p>
+  </div>
+
+  <SectionTitle title="Refereed Papers" id="refereed" />
+
+  <Entry
+    title="Re-Defining Vanishing Municipalities in Japan: A Multidimensional Clustering and SLM-Based Policy Insight Framework"
+    meta="Toma Okugawa, Keito Inoshita — Proceedings of the IEEE 15th Global Conference on Consumer Electronics (IEEE GCCE)"
+    date="Oct 2026"
+    badges={["Refereed", "Lead author", "To appear"]}
+  />
+  <Entry
+    title="ホイヘンスのサイクロイド振り子時計の製作と大学での教育実践"
+    meta="牧山 隆洋, 石橋 治樹, 奥河 董馬, 久保 康幸 — 日本物理教育学会"
+    date="Apr 2026"
+    lang="ja"
+    badges={["Refereed", "To appear"]}
+  >
+    First-year university education on the isochronism of the cycloidal pendulum.
+  </Entry>
+  <Entry
+    title="KiWi：公的機関における紙書類の安全な電子化を実現する 個人情報管理・請求システムの提案"
+    meta="瀬尾 敦生, 榎本 浩義, 石橋 治樹, 奥河 董馬, 濱田 捷聖 — 情報処理学会第88回全国大会講演論文集 (Proc. 88th National Convention of IPSJ)"
+    date="Feb 2026"
+    lang="ja"
+    badges={["Refereed"]}
+  >
+    KiWi: a secure information request and management system for public institutions through the digitization of
+    paper-based personal data.
+  </Entry>
+  <Entry
+    title="リアルタイム姿勢推定による弓道フォーム評価手法の提案とWeb実装"
+    meta="奥河 董馬, 益崎 智成, 牧山 隆洋 — 令和7年度 電気・電子・情報関係学会四国支部連合大会 講演論文集 (SJCIEE 2025)"
+    date="Sep 2025"
+    lang="ja"
+    badges={["Refereed", "Lead author"]}
+    highlightBadges={["Outstanding Presentation Award"]}
+  >
+    Proposal and web implementation of a Kyudo form evaluation method based on real-time pose estimation.
+  </Entry>
+
+  <SectionTitle title="Preprints" id="preprints" />
+
+  <Entry
+    title="SD-Retinex: A Stable Retinex Method for Low-Light Image Enhancement Designed Around the Sigmoid Derivative"
+    meta="Toma Okugawa — Zenodo"
+    date="Jun 2026"
+    badges={["Lead author", "Corresponding author"]}
+    links={[{ label: "DOI", url: "https://doi.org/10.5281/ZENODO.20945211" }]}
+  >
+    A lightweight, training-free, and deterministic Retinex method built on the derivative of the sigmoid
+    function, targeting real-time low-light image enhancement on edge devices.
+  </Entry>
+  <Entry
+    title="複素指数カーネルに基づく高速・構造保持型 Retinex手法 XCRの提案"
+    meta="奥河 董馬 — Jxiv"
+    date="Nov 2025"
+    lang="ja"
+    badges={["Lead author", "Corresponding author"]}
+    links={[{ label: "DOI", url: "https://doi.org/10.51094/jxiv.1961" }]}
+  >
+    A high-speed and structure-preserving Retinex method based on a complex exponential kernel (XCR).
+  </Entry>
+  <Entry
+    title="Fast Single-Scale Retinexの提案と低照度環境におけるリアルタイム骨格検出性能の評価"
+    meta="奥河 董馬 — Jxiv"
+    date="Nov 2025"
+    lang="ja"
+    badges={["Lead author", "Corresponding author"]}
+    links={[{ label: "DOI", url: "https://doi.org/10.51094/jxiv.1897" }]}
+  >
+    Proposal of Fast Single-Scale Retinex and evaluation of real-time human pose estimation performance under
+    low-light conditions.
+  </Entry>
+
+  <SectionTitle title="Presentations" id="presentations" />
+
+  <Entry
+    title="リアルタイム姿勢推定による弓道フォーム評価手法の提案とWeb実装"
+    meta="奥河 董馬, 益崎 智成, 牧山 隆洋 — 令和7年度 電気・電子・情報関係学会四国支部連合大会 (SJCIEE 2025)"
+    date="Sep 2025"
+    lang="ja"
+    badges={["Oral presentation"]}
+  />
+</BaseLayout>
