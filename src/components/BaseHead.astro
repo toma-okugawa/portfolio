@@ -12,6 +12,31 @@ export interface Props {
 
 const { title, description, image = '/social_img.png', ogType = 'website' } = Astro.props;
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+
+const siteURL = Astro.site?.href ?? Astro.url.origin;
+const personLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: '奥河 董馬',
+	alternateName: 'Toma Okugawa',
+	url: siteURL,
+	affiliation: {
+		'@type': 'CollegeOrUniversity',
+		name: 'National Institute of Technology (KOSEN), Yuge College',
+	},
+	sameAs: [
+		'https://researchmap.jp/t_okugawa',
+		'https://orcid.org/0009-0007-3553-0617',
+		'https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202601005443166280',
+	],
+};
+const websiteLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Toma Okugawa | Portfolio',
+	alternateName: '奥河 董馬 ポートフォリオ',
+	url: siteURL,
+};
 ---
 
 <!-- Global Metadata -->
@@ -40,3 +65,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- JSON-LD Structured Data -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
