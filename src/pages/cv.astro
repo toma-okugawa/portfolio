@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+import SubSection from "../components/SubSection.astro";
 import Entry from "../components/cv/Entry.astro";
 ---
 
@@ -28,23 +29,30 @@ import Entry from "../components/cv/Entry.astro";
     active
   />
 
-  <SectionTitle title="Research Interests" id="research-interests" />
+  <SectionTitle title="Research" id="research" />
 
-  <div class="flex flex-wrap gap-2 mb-2">
-    <span class="badge badge-outline badge-primary">Pose Estimation (姿勢推定)</span>
-    <span class="badge badge-outline badge-primary">Motion Analysis (動作解析)</span>
-    <span class="badge badge-outline badge-primary">Self-Directed Learning Support System (独習支援システム)</span>
-    <span class="badge badge-outline badge-primary">Real-Time Feedback (リアルタイムフィードバック)</span>
-    <span class="badge badge-outline badge-primary">Sports Engineering (スポーツ工学)</span>
+  <div class="grid gap-x-10 gap-y-8 md:grid-cols-2">
+    <SubSection title="Interests">
+      <div class="flex flex-wrap gap-2">
+        <span class="badge bg-primary/10 text-primary border-primary/20">Pose Estimation (姿勢推定)</span>
+        <span class="badge bg-primary/10 text-primary border-primary/20">Motion Analysis (動作解析)</span>
+        <span class="badge bg-primary/10 text-primary border-primary/20"
+          >Self-Directed Learning Support System (独習支援システム)</span
+        >
+        <span class="badge bg-primary/10 text-primary border-primary/20"
+          >Real-Time Feedback (リアルタイムフィードバック)</span
+        >
+        <span class="badge bg-primary/10 text-primary border-primary/20">Sports Engineering (スポーツ工学)</span>
+      </div>
+    </SubSection>
+    <SubSection title="Areas">
+      <ul class="list-disc mx-5 grid gap-1.5">
+        <li>Informatics — Human interfaces and interactions</li>
+        <li>Informatics — Perceptual information processing</li>
+        <li>Informatics — Intelligent informatics</li>
+      </ul>
+    </SubSection>
   </div>
-
-  <SectionTitle title="Research Areas" id="research-areas" />
-
-  <ul class="list-disc mx-6 mb-2 grid gap-1">
-    <li>Informatics — Human interfaces and interactions</li>
-    <li>Informatics — Perceptual information processing</li>
-    <li>Informatics — Intelligent informatics</li>
-  </ul>
 
   <SectionTitle title="Research Projects" id="research-projects" />
 
@@ -91,20 +99,23 @@ import Entry from "../components/cv/Entry.astro";
     date="Apr 2025"
   />
 
-  <SectionTitle title="Certifications" id="certifications" />
+  <SectionTitle title="Certifications & Memberships" id="memberships" />
 
-  <ul class="list-disc mx-6 mb-2 grid gap-1">
-    <li>Information Technology Passport Examination (ITパスポート)</li>
-  </ul>
-
-  <SectionTitle title="Professional Memberships" id="memberships" />
-
-  <Entry
-    title="The Institute of Electronics, Information and Communication Engineers (IEICE)"
-    date="Aug 2026 – Present"
-    active
-  />
-  <Entry title="Information Processing Society of Japan (IPSJ)" date="Jun 2025 – Present" active />
+  <div class="grid gap-x-10 gap-y-8 md:grid-cols-2">
+    <SubSection title="Certifications">
+      <ul class="list-disc mx-5 grid gap-1.5">
+        <li>Information Technology Passport Examination (ITパスポート)</li>
+      </ul>
+    </SubSection>
+    <SubSection title="Professional Memberships">
+      <Entry
+        title="The Institute of Electronics, Information and Communication Engineers (IEICE)"
+        date="Aug 2026 – Present"
+        active
+      />
+      <Entry title="Information Processing Society of Japan (IPSJ)" date="Jun 2025 – Present" active />
+    </SubSection>
+  </div>
 
   <SectionTitle title="Media Coverage" id="media" />
 

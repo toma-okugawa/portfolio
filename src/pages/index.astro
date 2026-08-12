@@ -31,11 +31,13 @@ const researchInterests = [
     </p>
 
     <div class="flex flex-wrap gap-2 mb-8">
-      {researchInterests.map((keyword) => <span class="badge badge-outline badge-primary">{keyword}</span>)}
+      {researchInterests.map((keyword) => <span class="badge bg-primary/10 text-primary border-primary/20">{keyword}</span>)}
     </div>
 
     <div class="flex flex-wrap gap-3">
-      <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>Contact Me</a>
+      <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`} onclick="event.preventDefault(); openMailModal();"
+        >Contact Me</a
+      >
       <a class="btn btn-outline btn-primary" href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer"
         >researchmap</a
       >
