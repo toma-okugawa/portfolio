@@ -5,3 +5,9 @@
 a {
     text-underline-offset: 3px;
 }
+
+/* daisyUI's .btn:focus-visible outline uses currentColor, which is white
+   (invisible) on solid primary buttons sitting on the white card. */
+.btn-primary:focus-visible {
+    outline-color: oklch(var(--p));
+}
