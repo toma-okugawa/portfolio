@@ -41,12 +41,14 @@ Cloudflare ダッシュボードで本リポジトリを接続し、以下を設
 `package.json` の `packageManager` と `.node-version` を Cloudflare が自動検出します。
 公開 URL が確定したら `astro.config.mjs` の `site` と `public/robots.txt` の Sitemap URL を更新してください。
 
-## 開発フロー (Git)
+## 開発フロー (Git / GitHub)
 
+- 作業は **Issue 起点**で管理します: 課題・改善は Issue に起票し、ラベル (`responsive` / `a11y` / `ui` / `disclosure` / `polish` など) で分類
 - `main` への直接 push は禁止 (ブランチ保護 ruleset)。変更は必ずブランチ → Pull Request 経由で行います
+- PR 本文の `Closes #N` で対応 Issue を紐付け、マージと同時にクローズします
 - PR は GitHub Actions の CI (`build`) が通ることがマージ条件です
 - コミットは [Conventional Commits](https://www.conventionalcommits.org/) 形式 (`feat:` / `fix:` / `chore:` など)
 
-## クレジット
+## ライセンス
 
-[Astrofy](https://github.com/manuelernestog/astrofy) テンプレート (MIT License) をベースにしています。
+一部のコードは MIT ライセンスの OSS に由来します。詳細は [LICENSE](LICENSE) を参照してください。
