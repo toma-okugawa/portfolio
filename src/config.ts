@@ -8,4 +8,5 @@ export const SITE_DESCRIPTION =
 export const CONTACT_EMAIL = 'i24010@yuge.kosen-ac.jp';
 export const RESEARCHMAP_URL = 'https://researchmap.jp/t_okugawa';
 export const ORCID_URL = 'https://orcid.org/0009-0007-3553-0617';
+export const GITHUB_URL = 'https://github.com/toma-okugawa';
 export const TRANSITION_API = true;

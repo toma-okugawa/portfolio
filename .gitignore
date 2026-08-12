@@ -28,6 +28,7 @@ researchmap.json
 
 # reference material (Atsuki Seo's site source, for design study only — not ours to publish)
 sample/
+compare/
 
 # local source assets not meant for deployment (original photos, etc.)
 assets-src/
