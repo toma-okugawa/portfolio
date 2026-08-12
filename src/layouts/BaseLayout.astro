@@ -28,11 +28,13 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
   </head>
   <body>
     <div class="bg-base-200 drawer lg:drawer-open">
-      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" aria-label="Open navigation menu" />
       <div class="drawer-content bg-base-200 min-h-screen">
         <Header title={SITE_AUTHOR} showMenuButton={includeSidebar} />
         <div class="p-3 lg:p-4">
-          <main class="bg-base-100 rounded-2xl shadow-sm w-full max-w-6xl p-6 md:p-10 min-h-[calc(100vh-7.5rem)]">
+          <main
+            class="bg-base-100 rounded-2xl shadow-sm w-full max-w-6xl mx-auto p-4 sm:p-6 md:p-10 min-h-[calc(100svh-7.5rem)] lg:min-h-[calc(100svh-9.5rem)]"
+          >
             <slot />
           </main>
         </div>
@@ -41,17 +43,17 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
 
-    <dialog id="mail-modal" class="modal">
+    <dialog id="mail-modal" class="modal" aria-labelledby="mail-modal-title">
       <div class="modal-box max-w-sm">
-        <h3 class="font-bold text-lg mb-3">Contact</h3>
+        <h3 id="mail-modal-title" class="font-bold text-lg mb-3">Contact</h3>
         <p class="text-sm text-base-content/70 mb-2">Send an email to:</p>
         <p class="font-mono text-sm bg-base-200 rounded px-3 py-2 mb-2 select-all break-all">{CONTACT_EMAIL}</p>
         <div class="modal-action mt-4 flex flex-wrap gap-2 justify-end">
           <form method="dialog">
-            <button class="btn btn-ghost btn-sm">Cancel</button>
+            <button class="btn btn-ghost">Cancel</button>
           </form>
-          <button class="btn btn-outline btn-primary btn-sm" onclick="copyContactEmail()">Copy address</button>
-          <a class="btn btn-primary btn-sm" href={`mailto:${CONTACT_EMAIL}`}>Open mail app</a>
+          <button class="btn btn-outline btn-primary" onclick="copyContactEmail()">Copy address</button>
+          <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>Open mail app</a>
         </div>
       </div>
       <form method="dialog" class="modal-backdrop">
@@ -59,10 +61,11 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
       </form>
     </dialog>
 
-    <div id="copy-toast" class="toast toast-end hidden z-50">
-      <div class="alert alert-success text-sm">
-        <span>Address copied!</span>
-      </div>
+    <div
+      id="copy-toast"
+      class="toast toast-end z-50 mb-[env(safe-area-inset-bottom)] mr-[env(safe-area-inset-right)]"
+      role="status"
+    >
     </div>
 
     <script is:inline define:vars={{ contactEmail: CONTACT_EMAIL }}>
@@ -71,14 +74,23 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
         modal && modal.showModal();
       };
       window.copyContactEmail = function () {
-        navigator.clipboard.writeText(contactEmail).then(function () {
-          const toast = document.getElementById("copy-toast");
+        const toast = document.getElementById("copy-toast");
+        const show = function (kind, message) {
           if (!toast) return;
-          toast.classList.remove("hidden");
+          toast.innerHTML =
+            '<div class="alert alert-' + kind + ' text-sm"><span>' + message + "</span></div>";
           setTimeout(function () {
-            toast.classList.add("hidden");
+            toast.replaceChildren();
           }, 2500);
-        });
+        };
+        navigator.clipboard.writeText(contactEmail).then(
+          function () {
+            show("success", "Address copied!");
+          },
+          function () {
+            show("error", "Copy failed");
+          }
+        );
       };
     </script>
   </body>
