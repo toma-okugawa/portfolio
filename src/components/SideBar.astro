@@ -15,42 +15,8 @@ const researchInterests = [
 <div class="drawer-side z-40 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
   <label for="my-drawer" class="drawer-overlay" aria-label="Close sidebar"></label>
   <aside
-    class="relative m-3 lg:m-4 lg:mr-0 rounded-2xl shadow-md px-6 pt-2 pb-10 h-auto min-h-[calc(100%-1.5rem)] lg:min-h-[calc(100%-2rem)] w-80 bg-primary text-primary-content flex flex-col"
+    class="relative lg:m-4 lg:mr-0 rounded-none lg:rounded-2xl shadow-md px-6 pt-2 pb-10 w-80 max-w-full lg:max-w-none min-h-full lg:min-h-0 lg:h-[calc(100dvh-2rem)] lg:overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden bg-primary text-primary-content flex flex-col"
   >
-    <a
-      href={`mailto:${CONTACT_EMAIL}`}
-      onclick="event.preventDefault(); openMailModal();"
-      class="btn btn-circle btn-sm btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary absolute top-4 left-4"
-      aria-label="Send an email"
-      title="Send an email"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="fill: currentColor;"
-        ><path
-          d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"
-        ></path></svg
-      >
-    </a>
-    <a
-      href={RESEARCHMAP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn-circle btn-sm btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary absolute top-4 right-4"
-      aria-label="researchmap profile"
-      title="researchmap profile"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-        <text
-          x="12"
-          y="17"
-          text-anchor="middle"
-          font-family="Georgia, 'Times New Roman', serif"
-          font-size="16"
-          font-weight="bold"
-          fill="currentColor">R</text
-        >
-      </svg>
-    </a>
-
     <div class="w-fit mx-auto mt-8 mb-3">
       <a href="/">
         <div class="avatar block m-auto">
@@ -66,11 +32,47 @@ const researchInterests = [
         </div>
       </a>
     </div>
-    <div class="text-center mb-4 px-2">
+    <div class="text-center mb-2 px-2">
       <div class="text-xl font-bold tracking-wider">Toma Okugawa</div>
       <div class="text-sm text-primary-content/85" lang="ja">奥河 董馬</div>
       <p class="text-sm tracking-wide text-primary-content/85 mt-2">Student Researcher</p>
-      <p class="text-xs text-primary-content/60 mt-0.5">NIT (KOSEN), Yuge College</p>
+      <p class="text-xs text-primary-content/75 mt-0.5">NIT (KOSEN), Yuge College</p>
+    </div>
+
+    <div class="flex justify-center gap-3 mb-3">
+      <a
+        href={`mailto:${CONTACT_EMAIL}`}
+        onclick="openMailModal(); return false;"
+        class="btn btn-circle btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary"
+        aria-label="Send an email"
+        title="Send an email"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: currentColor;"
+          ><path
+            d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"
+          ></path></svg
+        >
+      </a>
+      <a
+        href={RESEARCHMAP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-circle btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary"
+        aria-label="researchmap profile"
+        title="researchmap profile"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <text
+            x="12"
+            y="17"
+            text-anchor="middle"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="16"
+            font-weight="bold"
+            fill="currentColor">R</text
+          >
+        </svg>
+      </a>
     </div>
 
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
@@ -96,7 +98,7 @@ const researchInterests = [
           >
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            onclick="event.preventDefault(); openMailModal();"
+            onclick="openMailModal(); return false;"
             class="hover:underline break-all">{CONTACT_EMAIL}</a
           >
         </li>
