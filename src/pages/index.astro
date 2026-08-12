@@ -16,8 +16,8 @@ const researchInterests = [
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-4 mt-5">
     <div class="text-lg font-medium text-primary py-1">Student Researcher</div>
-    <h1 class="text-5xl font-bold">Toma Okugawa</h1>
-    <div class="text-2xl py-3 text-base-content/80" lang="ja">奥河 董馬</div>
+    <h1 class="text-4xl sm:text-5xl font-bold">Toma Okugawa</h1>
+    <div class="text-xl sm:text-2xl py-2 sm:py-3 text-base-content/80" lang="ja">奥河 董馬</div>
     <div class="text-base text-base-content/70">
       Department of Information Science and Technology,<br />
       National Institute of Technology (KOSEN), Yuge College
@@ -31,11 +31,17 @@ const researchInterests = [
     </p>
 
     <div class="flex flex-wrap gap-2 mb-8">
-      {researchInterests.map((keyword) => <span class="badge bg-primary/10 text-primary border-primary/20">{keyword}</span>)}
+      {
+        researchInterests.map((keyword) => (
+          <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start">
+            {keyword}
+          </span>
+        ))
+      }
     </div>
 
     <div class="flex flex-wrap gap-3">
-      <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`} onclick="event.preventDefault(); openMailModal();"
+      <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`} onclick="openMailModal(); return false;"
         >Contact Me</a
       >
       <a class="btn btn-outline btn-primary" href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer"

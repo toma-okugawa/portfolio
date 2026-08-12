@@ -1,14 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageTitle from "../components/PageTitle.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import SubSection from "../components/SubSection.astro";
 import Entry from "../components/cv/Entry.astro";
 ---
 
 <BaseLayout title="Curriculum Vitae" sideBarActiveItemID="cv">
-  <div class="mb-5 mt-5">
-    <h1 class="text-3xl font-bold">Curriculum Vitae</h1>
-  </div>
+  <PageTitle title="Curriculum Vitae" />
 
   <SectionTitle title="Profile" id="profile" />
 
@@ -31,18 +30,24 @@ import Entry from "../components/cv/Entry.astro";
 
   <SectionTitle title="Research" id="research" />
 
-  <div class="grid gap-x-10 gap-y-8 md:grid-cols-2">
+  <div class="grid gap-x-10 gap-y-8 lg:grid-cols-2">
     <SubSection title="Interests">
       <div class="flex flex-wrap gap-2">
-        <span class="badge bg-primary/10 text-primary border-primary/20">Pose Estimation (姿勢推定)</span>
-        <span class="badge bg-primary/10 text-primary border-primary/20">Motion Analysis (動作解析)</span>
-        <span class="badge bg-primary/10 text-primary border-primary/20"
+        <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start"
+          >Pose Estimation (姿勢推定)</span
+        >
+        <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start"
+          >Motion Analysis (動作解析)</span
+        >
+        <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start"
           >Self-Directed Learning Support System (独習支援システム)</span
         >
-        <span class="badge bg-primary/10 text-primary border-primary/20"
+        <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start"
           >Real-Time Feedback (リアルタイムフィードバック)</span
         >
-        <span class="badge bg-primary/10 text-primary border-primary/20">Sports Engineering (スポーツ工学)</span>
+        <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start"
+          >Sports Engineering (スポーツ工学)</span
+        >
       </div>
     </SubSection>
     <SubSection title="Areas">
@@ -101,7 +106,7 @@ import Entry from "../components/cv/Entry.astro";
 
   <SectionTitle title="Certifications & Memberships" id="memberships" />
 
-  <div class="grid gap-x-10 gap-y-8 md:grid-cols-2">
+  <div class="grid gap-x-10 gap-y-8 lg:grid-cols-2">
     <SubSection title="Certifications">
       <ul class="list-disc mx-5 grid gap-1.5">
         <li>Information Technology Passport Examination (ITパスポート)</li>

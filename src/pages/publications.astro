@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageTitle from "../components/PageTitle.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import Entry from "../components/cv/Entry.astro";
 
@@ -14,18 +15,12 @@ const FSSR_ABSTRACT =
 ---
 
 <BaseLayout title="Publications" sideBarActiveItemID="publications">
-  <div class="mb-5 mt-5">
-    <h1 class="text-3xl font-bold">Publications</h1>
-    <p class="text-base-content/70 mt-2">
-      A complete list is also available on
-      <a
-        href="https://researchmap.jp/t_okugawa"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link link-primary">researchmap</a
-      >.
-    </p>
-  </div>
+  <PageTitle title="Publications">
+    A complete list is also available on
+    <a href="https://researchmap.jp/t_okugawa" target="_blank" rel="noopener noreferrer" class="link link-primary"
+      >researchmap</a
+    >.
+  </PageTitle>
 
   <SectionTitle title="Refereed Papers" id="refereed" />
 
