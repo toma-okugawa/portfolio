@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
-import TimeLineElement from "../components/cv/TimeLine.astro";
 import Entry from "../components/cv/Entry.astro";
 ---
 
@@ -22,12 +21,12 @@ import Entry from "../components/cv/Entry.astro";
 
   <SectionTitle title="Education" id="education" />
 
-  <div class="time-line-container grid gap-4 mb-2">
-    <TimeLineElement
-      title="National Institute of Technology (KOSEN), Yuge College"
-      subtitle="Apr 2024 – Present · Department of Information Science and Technology · Ehime, Japan"
-    />
-  </div>
+  <Entry
+    title="National Institute of Technology (KOSEN), Yuge College"
+    meta="Department of Information Science and Technology · Ehime, Japan"
+    date="Apr 2024 – Present"
+    active
+  />
 
   <SectionTitle title="Research Interests" id="research-interests" />
 
@@ -103,8 +102,9 @@ import Entry from "../components/cv/Entry.astro";
   <Entry
     title="The Institute of Electronics, Information and Communication Engineers (IEICE)"
     date="Aug 2026 – Present"
+    active
   />
-  <Entry title="Information Processing Society of Japan (IPSJ)" date="Jun 2025 – Present" />
+  <Entry title="Information Processing Society of Japan (IPSJ)" date="Jun 2025 – Present" active />
 
   <SectionTitle title="Media Coverage" id="media" />
 
