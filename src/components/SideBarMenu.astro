@@ -1,17 +1,18 @@
 ---
 import { CONTACT_EMAIL } from "../config";
 const { sideBarActiveItemID } = Astro.props;
-const activeClass = "bg-primary text-primary-content font-medium";
+const activeClass = "bg-primary-content !text-primary font-semibold";
 ---
 
-<ul class="menu grow shrink menu-md overflow-y-auto">
-    <li><a class="py-3 text-base" id="home" href="/">Home</a></li>
-    <li><a class="py-3 text-base" id="cv" href="/cv">Curriculum Vitae</a></li>
-    <li><a class="py-3 text-base" id="publications" href="/publications">Publications</a></li>
-    <li><a class="py-3 text-base" id="projects" href="/projects">Projects</a></li>
+<ul class="menu menu-md px-0">
+    <li><a class="py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10" id="home" href="/">Home</a></li>
+    <li><a class="py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10" id="cv" href="/cv">Curriculum Vitae</a></li>
+    <li><a class="py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10" id="publications" href="/publications">Publications</a></li>
+    <li><a class="py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10" id="projects" href="/projects">Projects</a></li>
     <li>
         <a
-            class="py-3 text-base"
+            class="py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10"
+            id="contact"
             href={`mailto:${CONTACT_EMAIL}`}
             referrerpolicy="no-referrer-when-downgrade">Contact</a
         >
