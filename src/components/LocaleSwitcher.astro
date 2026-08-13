@@ -1,0 +1,38 @@
+---
+import { locales, localizePath, useTranslations, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  basePath: string;
+  /** true when rendered on the primary-colored sidebar. */
+  onPrimary?: boolean;
+}
+
+const { locale, basePath, onPrimary = false } = Astro.props;
+const t = useTranslations(locale);
+const labels: Record<Locale, string> = { en: "EN", ja: "日本語" };
+---
+
+<nav aria-label={t("switcher.label")} class="join">
+  {
+    locales.map((loc) => (
+      <a
+        href={localizePath(loc, basePath)}
+        aria-current={loc === locale ? "page" : undefined}
+        lang={loc === "ja" ? "ja" : undefined}
+        class:list={[
+          "join-item btn btn-sm font-medium",
+          onPrimary
+            ? loc === locale
+              ? "bg-primary-content text-primary border-primary-content hover:bg-primary-content hover:border-primary-content"
+              : "btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content/15"
+            : loc === locale
+              ? "btn-primary"
+              : "btn-ghost border border-base-300",
+        ]}
+      >
+        {labels[loc]}
+      </a>
+    ))
+  }
+</nav>

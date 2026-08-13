@@ -12,6 +12,10 @@ export interface Props {
   active?: boolean;
   /** Optional abstract shown in a collapsible disclosure. */
   abstract?: string;
+  /** Localized label for the abstract disclosure. */
+  abstractLabel?: string;
+  /** Localized label for the ongoing badge. */
+  ongoingLabel?: string;
 }
 
 const {
@@ -25,6 +29,8 @@ const {
   lang,
   active = false,
   abstract,
+  abstractLabel = "Abstract",
+  ongoingLabel = "Ongoing",
 } = Astro.props;
 
 const badgeClass =
@@ -47,7 +53,7 @@ const badgeClass =
           </span>
         )}
         {active && (
-          <span class="badge badge-sm badge-outline text-success border-success/40 font-medium">Ongoing</span>
+          <span class="badge badge-sm badge-outline text-success border-success/40 font-medium">{ongoingLabel}</span>
         )}
       </div>
     )
@@ -96,7 +102,7 @@ const badgeClass =
   {
     abstract && (
       <details class="collapse collapse-arrow border border-base-300 bg-base-100 mt-2 max-w-[75ch]">
-        <summary class="collapse-title text-sm font-medium text-primary min-h-0 py-3 pr-10">Abstract</summary>
+        <summary class="collapse-title text-sm font-medium text-primary min-h-0 py-3 pr-10">{abstractLabel}</summary>
         <div class="collapse-content text-sm leading-relaxed text-base-content/80" lang={lang}>
           <p>{abstract}</p>
         </div>

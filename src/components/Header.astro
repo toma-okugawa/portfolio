@@ -1,5 +1,15 @@
 ---
-const { title, showMenuButton = true } = Astro.props;
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import { localizePath, useTranslations, type Locale } from "../i18n/ui";
+
+interface Props {
+  showMenuButton?: boolean;
+  locale?: Locale;
+  basePath?: string;
+}
+
+const { showMenuButton = true, locale = "en", basePath = "/" } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <div
@@ -9,7 +19,7 @@ const { title, showMenuButton = true } = Astro.props;
     <div class="navbar-start">
       {
         showMenuButton && (
-          <label for="my-drawer" class="btn btn-square btn-ghost drawer-button" aria-label="Open menu">
+          <label for="my-drawer" class="btn btn-square btn-ghost drawer-button" aria-label={t("header.menuLabel")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -23,8 +33,10 @@ const { title, showMenuButton = true } = Astro.props;
       }
     </div>
     <div class="navbar-center">
-      <a class="btn btn-ghost normal-case text-xl" href="/">{title}</a>
+      <a class="btn btn-ghost normal-case text-xl" href={localizePath(locale, "/")}>{t("site.author")}</a>
     </div>
-    <div class="navbar-end"></div>
+    <div class="navbar-end pr-2">
+      <LocaleSwitcher locale={locale} basePath={basePath} />
+    </div>
   </div>
 </div>

@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../PageTitle.astro";
+import SectionTitle from "../SectionTitle.astro";
+import SubSection from "../SubSection.astro";
+import DataEntry from "../cv/DataEntry.astro";
+import { useTranslations, type Locale } from "../../i18n/ui";
+import {
+  awards,
+  certifications,
+  education,
+  mediaCoverage,
+  memberships,
+  otherActivities,
+  researchAreas,
+  researchInterestPills,
+  researchProject,
+} from "../../data/entries";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t("cv.title")} sideBarActiveItemID="cv" locale={locale}>
+  <PageTitle title={t("cv.title")} />
+
+  <SectionTitle title={t("cv.profile")} id="profile" />
+
+  {
+    locale === "ja" ? (
+      <p class="mb-2 leading-relaxed max-w-[70ch]">
+        弓削商船高等専門学校 情報工学科に在学中です。研究キーワードは姿勢推定・動作解析・独習支援システム・リアルタイムフィードバック・スポーツ工学。経済産業省 AKATSUKIプロジェクトの採択課題では研究代表者を務めたほか、Tongaliビジネスプランコンテスト2026ではチームとして複数の賞を受賞しました。
+      </p>
+    ) : (
+      <p class="mb-2 leading-relaxed max-w-[70ch]">
+        I am a student in the Department of Information Science and Technology at National Institute of
+        Technology (KOSEN), Yuge College. My research interests include pose estimation, motion analysis,
+        self-directed learning support systems, real-time feedback, and sports engineering. I have served as
+        principal investigator of a competitively funded research project under the AKATSUKI Project of the
+        Ministry of Economy, Trade and Industry, and my team received multiple awards at the Tongali Business
+        Plan Contest 2026.
+      </p>
+    )
+  }
+
+  <SectionTitle title={t("cv.education")} id="education" />
+
+  <DataEntry entry={education} locale={locale} />
+
+  <SectionTitle title={t("cv.research")} id="research" />
+
+  <div class="grid gap-x-10 gap-y-8 lg:grid-cols-2">
+    <SubSection title={t("cv.interests")}>
+      <div class="flex flex-wrap gap-2">
+        {
+          researchInterestPills.map((keyword) => (
+            <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start">
+              {keyword[locale]}
+            </span>
+          ))
+        }
+      </div>
+    </SubSection>
+    <SubSection title={t("cv.areas")}>
+      <ul class="list-disc mx-5 grid gap-1.5">
+        {researchAreas.map((area) => <li>{area[locale]}</li>)}
+      </ul>
+    </SubSection>
+  </div>
+
+  <SectionTitle title={t("cv.researchProjects")} id="research-projects" />
+
+  <DataEntry entry={researchProject} locale={locale} />
+
+  <SectionTitle title={t("cv.awards")} id="awards" />
+
+  {awards.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+
+  <SectionTitle title={t("cv.certsMemberships")} id="memberships" />
+
+  <div class="grid gap-x-10 gap-y-8 lg:grid-cols-2">
+    <SubSection title={t("cv.certifications")}>
+      <ul class="list-disc mx-5 grid gap-1.5">
+        {certifications.map((cert) => <li>{cert[locale]}</li>)}
+      </ul>
+    </SubSection>
+    <SubSection title={t("cv.memberships")}>
+      {memberships.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+    </SubSection>
+  </div>
+
+  <SectionTitle title={t("cv.media")} id="media" />
+
+  {mediaCoverage.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+
+  <SectionTitle title={t("cv.others")} id="others" />
+
+  {otherActivities.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+</BaseLayout>
