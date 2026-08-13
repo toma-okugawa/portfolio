@@ -5,7 +5,19 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: Cloudflare Pages の公開 URL 確定後に更新する (カスタムドメイン or *.pages.dev)
   site: 'https://t-okugawa.dev',
-  integrations: [mdx(), sitemap(), tailwind()]
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ja'],
+  },
+  integrations: [
+    mdx(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', ja: 'ja' },
+      },
+    }),
+    tailwind(),
+  ],
 });

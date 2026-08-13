@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../PageTitle.astro";
+import SubSection from "../SubSection.astro";
+import DataEntry from "../cv/DataEntry.astro";
+import { useTranslations, type Locale } from "../../i18n/ui";
+import { researchProject, works } from "../../data/entries";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t("projects.title")} sideBarActiveItemID="projects" locale={locale}>
+  <PageTitle title={t("projects.title")} />
+
+  <div class="grid gap-10">
+    <SubSection title={t("projects.funded")} as="h2">
+      <DataEntry entry={researchProject} locale={locale} />
+    </SubSection>
+
+    <SubSection title={t("projects.works")} as="h2">
+      {works.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+    </SubSection>
+  </div>
+</BaseLayout>
