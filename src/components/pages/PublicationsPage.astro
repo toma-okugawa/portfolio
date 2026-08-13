@@ -19,21 +19,16 @@ const t = useTranslations(locale);
   <PageTitle title={t("pubs.title")}>
     {
       locale === "ja" ? (
-        <>
-          完全なリストは
-          <a href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer" class="link link-primary">
-            researchmap
-          </a>
+        <Fragment>
+          すべての業績は
+          <a href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer" class="link link-primary">researchmap</a>
           でもご覧いただけます。
-        </>
+        </Fragment>
       ) : (
-        <>
-          A complete list is also available on
-          <a href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer" class="link link-primary">
-            researchmap
-          </a>
-          .
-        </>
+        <Fragment>
+          A complete list is also available on{" "}
+          <a href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer" class="link link-primary">researchmap</a>.
+        </Fragment>
       )
     }
   </PageTitle>

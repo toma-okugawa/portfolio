@@ -11,6 +11,8 @@ export interface Props {
 	ogType?: string;
 	locale?: Locale;
 	basePath?: string;
+	/** Error pages (404) must not advertise canonical/alternate URLs that do not exist. */
+	suppressAlternates?: boolean;
 }
 
 const {
@@ -20,12 +22,16 @@ const {
 	ogType = 'website',
 	locale = 'en',
 	basePath = '/',
+	suppressAlternates = false,
 } = Astro.props;
-const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+const canonicalURL =
+	!suppressAlternates && Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 
 const siteURL = Astro.site?.href ?? Astro.url.origin;
-const alternateEn = Astro.site ? new URL(localizePath('en', basePath), Astro.site) : undefined;
-const alternateJa = Astro.site ? new URL(localizePath('ja', basePath), Astro.site) : undefined;
+const alternateEn =
+	!suppressAlternates && Astro.site ? new URL(localizePath('en', basePath), Astro.site) : undefined;
+const alternateJa =
+	!suppressAlternates && Astro.site ? new URL(localizePath('ja', basePath), Astro.site) : undefined;
 
 const personLd = {
 	'@context': 'https://schema.org',
@@ -46,8 +52,9 @@ const personLd = {
 const websiteLd = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
-	name: 'Toma Okugawa | Portfolio',
-	alternateName: '奥河 董馬 ポートフォリオ',
+	name: locale === 'ja' ? '奥河 董馬 | ポートフォリオ' : 'Toma Okugawa | Portfolio',
+	alternateName: locale === 'ja' ? 'Toma Okugawa | Portfolio' : '奥河 董馬 ポートフォリオ',
+	inLanguage: locale,
 	url: siteURL,
 };
 ---
@@ -60,7 +67,7 @@ const websiteLd = {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL} />
+{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 {alternateEn && <link rel="alternate" hreflang="en" href={alternateEn} />}
 {alternateJa && <link rel="alternate" hreflang="ja" href={alternateJa} />}
 {alternateEn && <link rel="alternate" hreflang="x-default" href={alternateEn} />}
@@ -71,6 +78,7 @@ const websiteLd = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 <meta property="og:locale" content={locale === 'ja' ? 'ja_JP' : 'en_US'} />
+<meta property="og:locale:alternate" content={locale === 'ja' ? 'en_US' : 'ja_JP'} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={Astro.url} />

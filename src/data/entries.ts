@@ -12,6 +12,8 @@ export type EntryData = {
   /** lang attribute for the title text, per page locale (set when the title language differs from the page language). */
   titleLang?: Partial<Record<Locale, string>>;
   meta?: L;
+  /** lang attribute for the meta line, per page locale (set when the meta language differs from the page language). */
+  metaLang?: Partial<Record<Locale, string>>;
   date?: L;
   badges?: L[];
   highlightBadges?: L[];
@@ -42,6 +44,7 @@ export const refereedPapers: EntryData[] = [
     meta: same(
       'Toma Okugawa, Keito Inoshita — Proceedings of the IEEE 15th Global Conference on Consumer Electronics (IEEE GCCE)'
     ),
+    metaLang: { ja: 'en' },
     date: l('Oct 2026', '2026年10月'),
     badges: [REFEREED, LEAD, TO_APPEAR],
   },
@@ -49,10 +52,8 @@ export const refereedPapers: EntryData[] = [
     id: 'pendulum2026',
     title: same('ホイヘンスのサイクロイド振り子時計の製作と大学での教育実践'),
     titleLang: { en: 'ja' },
-    meta: l(
-      '牧山 隆洋, 石橋 治樹, 奥河 董馬, 久保 康幸 — 日本物理教育学会',
-      '牧山 隆洋, 石橋 治樹, 奥河 董馬, 久保 康幸 — 日本物理教育学会'
-    ),
+    meta: same('牧山 隆洋, 石橋 治樹, 奥河 董馬, 久保 康幸 — 日本物理教育学会'),
+    metaLang: { en: 'ja' },
     date: l('Apr 2026', '2026年4月'),
     badges: [REFEREED, TO_APPEAR],
     description: l('First-year university education on the isochronism of the cycloidal pendulum.', ''),
@@ -64,6 +65,7 @@ export const refereedPapers: EntryData[] = [
     meta: same(
       '瀬尾 敦生, 榎本 浩義, 石橋 治樹, 奥河 董馬, 濱田 捷聖 — 情報処理学会第88回全国大会講演論文集 (Proc. 88th National Convention of IPSJ)'
     ),
+    metaLang: { en: 'ja' },
     date: l('Feb 2026', '2026年2月'),
     badges: [REFEREED],
     description: l(
@@ -78,6 +80,7 @@ export const refereedPapers: EntryData[] = [
     meta: same(
       '奥河 董馬, 益崎 智成, 牧山 隆洋 — 令和7年度 電気・電子・情報関係学会四国支部連合大会 講演論文集 (SJCIEE 2025)'
     ),
+    metaLang: { en: 'ja' },
     date: l('Sep 2025', '2025年9月'),
     badges: [REFEREED, LEAD],
     highlightBadges: [l('Outstanding Presentation Award', '優秀発表賞')],
@@ -101,7 +104,7 @@ export const preprints: EntryData[] = [
     links: [{ label: same('DOI'), url: 'https://doi.org/10.5281/ZENODO.20945211' }],
     description: l(
       'A lightweight, training-free, and deterministic Retinex method built on the derivative of the sigmoid function, targeting real-time low-light image enhancement on edge devices.',
-      'シグモイド関数の導関数を設計原理とする、軽量・学習不要・決定的な Retinex 系低照度画像強調手法。エッジデバイス上でのリアルタイム処理を目標としています。'
+      'シグモイド関数の導関数を設計原理とする、軽量・学習不要・決定論的なRetinex系低照度画像強調手法。エッジデバイス上でのリアルタイム処理を目標としています。'
     ),
     abstract: same(
       'Low-light image enhancement (LLIE) is an important pre-processing step in surveillance, medical, industrial-inspection, and disaster-response settings where cloud transmission is restricted, creating demand for lightweight, training-free, deterministic methods that run in real time on edge devices. We propose a Retinex-based method, SD-Retinex, built on one principle: the derivative of the sigmoid function. We first show that the illumination kernel of our prior method XCR is exactly this derivative sampled on the imaginary axis, and that its instability—in kernel radius and slope, with a saturating reflectance gain—is a direct consequence of the logistic poles lying there. Guided by this diagnosis, SD-Retinex relocates the derivative to where it is stable by construction: a real-axis separable illumination kernel (no poles, O(N) per pixel) and a perceptually motivated bounded sigmoid (Naka–Rushton) tone map that needs no hard clipping. Ablations isolate the contributions: the bounded tone map is the dominant quality factor, while the real-axis kernel matches a scale-matched Gaussian in quality and is adopted for its (a,N) stability. Among training-free CPU methods SD-Retinex is the strongest—surpassing classical Retinex (SSR, MSR, LIME), XCR, and the zero-reference deep methods Zero-DCE and SCI in PSNR and color error ΔE without any training—while the paired-trained URetinex-Net and Retinexformer serve as stronger GPU upper references that quantify the price of training.'
@@ -112,6 +115,7 @@ export const preprints: EntryData[] = [
     title: same('複素指数カーネルに基づく高速・構造保持型 Retinex手法 XCRの提案'),
     titleLang: { en: 'ja' },
     meta: same('奥河 董馬 — Jxiv'),
+    metaLang: { en: 'ja' },
     date: l('Nov 2025', '2025年11月'),
     badges: [LEAD, CORRESPONDING],
     links: [{ label: same('DOI'), url: 'https://doi.org/10.51094/jxiv.1961' }],
@@ -125,6 +129,7 @@ export const preprints: EntryData[] = [
     title: same('Fast Single-Scale Retinexの提案と低照度環境におけるリアルタイム骨格検出性能の評価'),
     titleLang: { en: 'ja' },
     meta: same('奥河 董馬 — Jxiv'),
+    metaLang: { en: 'ja' },
     date: l('Nov 2025', '2025年11月'),
     badges: [LEAD, CORRESPONDING],
     links: [{ label: same('DOI'), url: 'https://doi.org/10.51094/jxiv.1897' }],
@@ -144,6 +149,7 @@ export const presentations: EntryData[] = [
     title: same('リアルタイム姿勢推定による弓道フォーム評価手法の提案とWeb実装'),
     titleLang: { en: 'ja' },
     meta: same('奥河 董馬, 益崎 智成, 牧山 隆洋 — 令和7年度 電気・電子・情報関係学会四国支部連合大会 (SJCIEE 2025)'),
+    metaLang: { en: 'ja' },
     date: l('Sep 2025', '2025年9月'),
     badges: [l('Oral presentation', '口頭発表')],
   },
@@ -230,7 +236,7 @@ export function awardById(id: string): EntryData {
 /** Home page shows the Tongali entry with a combined one-line title. */
 export const tongaliSummaryTitle: L = l(
   'Tongali Business Plan Contest 2026 — 5th Place Tongali Award, NICT Award, and Supporter Awards',
-  'Tongaliビジネスプランコンテスト2026 — Tongali賞5位・NICT賞・サポーター賞'
+  'Tongaliビジネスプランコンテスト2026 — Tongali賞 5位・NICT賞・サポーター賞'
 );
 
 // ---- CV ----
@@ -344,7 +350,7 @@ export const sidebarInterests: L[] = [
 ];
 
 export const certifications: L[] = [
-  l('Information Technology Passport Examination (ITパスポート)', 'ITパスポート試験'),
+  l('Information Technology Passport Examination (ITパスポート)', 'ITパスポート'),
 ];
 
 // ---- projects (works) ----

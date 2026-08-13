@@ -18,6 +18,8 @@ const labels: Record<Locale, string> = { en: "EN", ja: "日本語" };
     locales.map((loc) => (
       <a
         href={localizePath(loc, basePath)}
+        hreflang={loc}
+        rel={loc === locale ? undefined : "alternate"}
         aria-current={loc === locale ? "page" : undefined}
         lang={loc === "ja" ? "ja" : undefined}
         class:list={[

@@ -17,6 +17,8 @@ interface Props {
   sideBarActiveItemID?: string;
   ogType?: string;
   locale?: Locale;
+  /** Error pages: link the switcher to the home pages and emit no canonical/alternate URLs. */
+  isErrorPage?: boolean;
 }
 
 const {
@@ -27,10 +29,11 @@ const {
   sideBarActiveItemID,
   ogType,
   locale = "en",
+  isErrorPage = false,
 } = Astro.props;
 
 const t = useTranslations(locale);
-const basePath = basePathOf(Astro.url.pathname);
+const basePath = isErrorPage ? "/" : basePathOf(Astro.url.pathname);
 const pageTitle = title ? `${title} | ${t("site.author")}` : t("site.title");
 const pageDescription = description ?? t("site.description");
 ---
@@ -45,6 +48,7 @@ const pageDescription = description ?? t("site.description");
       ogType={ogType}
       locale={locale}
       basePath={basePath}
+      suppressAlternates={isErrorPage}
     />
     {TRANSITION_API && <ViewTransitions />}
   </head>
