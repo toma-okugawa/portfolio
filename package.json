@@ -1,6 +1,6 @@
 {
   "name": "t-okugawa-portfolio",
-  "description": "Portfolio and academic CV of Toma Okugawa, built with Astro and TailwindCSS (based on the Astrofy template).",
+  "description": "Portfolio and academic CV of Toma Okugawa.",
   "type": "module",
   "version": "1.0.0",
   "private": true,
