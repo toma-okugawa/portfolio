@@ -1,12 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { ui } from "../i18n/ui";
 ---
 
-<BaseLayout title="404: Not Found" includeSidebar={false}>
+<BaseLayout title={ui.en["notfound.title"]} includeSidebar={false} isErrorPage>
   <div class="flex min-h-[calc(100svh-16rem)] flex-col items-center justify-center text-center">
     <h1 class="text-7xl sm:text-8xl font-bold text-primary mb-4">404</h1>
-    <h2 class="text-2xl mb-3">Page Not Found</h2>
-    <p class="text-base-content/70">The page you're looking for doesn't exist or has been moved.</p>
-    <a class="btn btn-primary mt-9" href="/">Back to Home</a>
+    <h2 class="text-2xl mb-1">{ui.en["notfound.heading"]}</h2>
+    <p class="text-xl mb-4" lang="ja">{ui.ja["notfound.heading"]}</p>
+    <p class="text-base-content/70">{ui.en["notfound.message"]}</p>
+    <p class="text-base-content/70" lang="ja">{ui.ja["notfound.message"]}</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-9">
+      <a class="btn btn-primary" href="/" hreflang="en">{ui.en["notfound.back"]}</a>
+      <a class="btn btn-outline btn-primary" href="/ja/" hreflang="ja" lang="ja">{ui.ja["notfound.back"]}</a>
+    </div>
   </div>
 </BaseLayout>

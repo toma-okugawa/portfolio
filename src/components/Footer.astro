@@ -1,10 +1,26 @@
 ---
-import { SITE_AUTHOR } from "../config";
+import type { Locale } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
 const today = new Date();
 ---
 
 <footer class="footer footer-center block mb-5 pt-10 text-sm text-base-content/70">
   <div class="pb-2">
-    <span>&copy; {today.getFullYear()} {SITE_AUTHOR} (<span lang="ja">奥河 董馬</span>)</span>
+    {
+      locale === "ja" ? (
+        <span>
+          &copy; {today.getFullYear()} 奥河 董馬 (<span lang="en">Toma Okugawa</span>)
+        </span>
+      ) : (
+        <span>
+          &copy; {today.getFullYear()} Toma Okugawa (<span lang="ja">奥河 董馬</span>)
+        </span>
+      )
+    }
   </div>
 </footer>

@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../SectionTitle.astro";
+import DataEntry from "../cv/DataEntry.astro";
+import { CONTACT_EMAIL, RESEARCHMAP_URL, ORCID_URL } from "../../config";
+import { localizePath, useTranslations, type Locale } from "../../i18n/ui";
+import {
+  awardById,
+  publicationById,
+  recentAwardIds,
+  researchInterestPills,
+  selectedPublicationIds,
+  tongaliSummaryTitle,
+} from "../../data/entries";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const selectedPublications = selectedPublicationIds.map(publicationById);
+const recentAwards = recentAwardIds.map((id) => {
+  const award = awardById(id);
+  if (id === "tongali2026") {
+    return { ...award, title: tongaliSummaryTitle, highlightBadges: [] };
+  }
+  return { ...award, highlightBadges: [] };
+});
+---
+
+<BaseLayout sideBarActiveItemID="home" locale={locale}>
+  <div class="pb-4 mt-5">
+    <div class="text-lg font-medium text-primary py-1">{t("hero.role")}</div>
+    {
+      locale === "ja" ? (
+        <>
+          <h1 class="text-4xl sm:text-5xl font-bold">奥河 董馬</h1>
+          <div class="text-xl sm:text-2xl py-2 sm:py-3 text-base-content/80" lang="en">
+            Toma Okugawa
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 class="text-4xl sm:text-5xl font-bold">Toma Okugawa</h1>
+          <div class="text-xl sm:text-2xl py-2 sm:py-3 text-base-content/80" lang="ja">
+            奥河 董馬
+          </div>
+        </>
+      )
+    }
+    <div class="text-base text-base-content/70">
+      {t("hero.affiliation1")}<br />
+      {t("hero.affiliation2")}
+    </div>
+
+    {
+      locale === "ja" ? (
+        <p class="py-5 text-base leading-relaxed max-w-[68ch]">
+          リアルタイムフィードバックを備えた独習支援システムのための<b>姿勢推定</b>・<b>動作解析</b>を中心に、弓道フォーム評価などスポーツ工学への応用を研究しています。また<b>低照度画像強調</b>にも取り組み、Retinex系手法 XCR / SD-Retinex を提案しています。
+        </p>
+      ) : (
+        <p class="py-5 text-base leading-relaxed max-w-[68ch]">
+          My research focuses on <b>human pose estimation</b> and <b>motion analysis</b> for self-directed
+          learning support systems with real-time feedback, including applications in sports engineering such as
+          Kyudo (Japanese archery) form evaluation. I also work on <b>low-light image enhancement</b>, where I
+          have proposed the Retinex-based methods XCR and SD-Retinex.
+        </p>
+      )
+    }
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      {
+        researchInterestPills.map((keyword) => (
+          <span class="badge bg-primary/10 text-primary border-primary/20 h-auto max-w-full whitespace-normal py-1 leading-snug text-start">
+            {keyword[locale]}
+          </span>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`} onclick="openMailModal(); return false;"
+        >{t("hero.contactMe")}</a
+      >
+      <a class="btn btn-outline btn-primary" href={RESEARCHMAP_URL} target="_blank" rel="noopener noreferrer"
+        >researchmap</a
+      >
+      <a class="btn btn-outline btn-primary" href={ORCID_URL} target="_blank" rel="noopener noreferrer">ORCID</a>
+    </div>
+  </div>
+
+  <SectionTitle title={t("home.selectedPublications")} />
+
+  {selectedPublications.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+
+  <div class="mt-4">
+    <a href={localizePath(locale, "/publications/")} class="link link-primary link-hover font-medium group"
+      >{t("home.viewAllPublications")} <span class="inline-block transition-transform group-hover:translate-x-1"
+        >→</span
+      ></a
+    >
+  </div>
+
+  <SectionTitle title={t("home.recentAwards")} />
+
+  {recentAwards.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+
+  <div class="mt-4">
+    <a href={localizePath(locale, "/cv/") + "#awards"} class="link link-primary link-hover font-medium group"
+      >{t("home.viewAllAwards")} <span class="inline-block transition-transform group-hover:translate-x-1">→</span
+      ></a
+    >
+  </div>
+</BaseLayout>
