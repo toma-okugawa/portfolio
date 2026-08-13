@@ -17,7 +17,7 @@ const t = useTranslations(locale);
 <BaseLayout title={t("projects.title")} sideBarActiveItemID="projects" locale={locale}>
   <PageTitle title={t("projects.title")} />
 
-  <div class="grid gap-10">
+  <div class="grid gap-10 2xl:grid-cols-2 2xl:gap-x-12">
     <SubSection title={t("projects.funded")} as="h2">
       <DataEntry entry={researchProject} locale={locale} />
     </SubSection>
