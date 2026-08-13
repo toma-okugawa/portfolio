@@ -16,6 +16,7 @@ const entryProps = {
   ongoingLabel: t("entry.ongoing"),
   title: entry.title[locale],
   meta: entry.meta?.[locale] || undefined,
+  metaLang: entry.metaLang?.[locale],
   date: entry.date?.[locale],
   badges: (entry.badges ?? []).map((b) => b[locale]),
   highlightBadges: (entry.highlightBadges ?? []).map((b) => b[locale]),
