@@ -93,11 +93,17 @@ const t = useTranslations(locale);
     </SubSection>
   </div>
 
-  <SectionTitle title={t("cv.media")} id="media" />
+  <div class="grid gap-x-12 2xl:grid-cols-2">
+    <section>
+      <SectionTitle title={t("cv.media")} id="media" />
 
-  {mediaCoverage.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+      {mediaCoverage.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+    </section>
 
-  <SectionTitle title={t("cv.others")} id="others" />
+    <section>
+      <SectionTitle title={t("cv.others")} id="others" />
 
-  {otherActivities.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+      {otherActivities.map((entry) => <DataEntry entry={entry} locale={locale} />)}
+    </section>
+  </div>
 </BaseLayout>
