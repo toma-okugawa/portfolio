@@ -10,7 +10,9 @@ interface Props {
 
 const { locale, basePath, onPrimary = false } = Astro.props;
 const t = useTranslations(locale);
-const labels: Record<Locale, string> = { en: "EN", ja: "日本語" };
+/** Two-letter codes keep both buttons the same width; the endonym is exposed to screen readers. */
+const codes: Record<Locale, string> = { en: "EN", ja: "JA" };
+const endonyms: Record<Locale, string> = { en: "English", ja: "日本語" };
 ---
 
 <nav aria-label={t("switcher.label")} class="join">
@@ -21,9 +23,8 @@ const labels: Record<Locale, string> = { en: "EN", ja: "日本語" };
         hreflang={loc}
         rel={loc === locale ? undefined : "alternate"}
         aria-current={loc === locale ? "page" : undefined}
-        lang={loc === "ja" ? "ja" : undefined}
         class:list={[
-          "join-item btn btn-sm font-medium",
+          "join-item btn btn-sm font-medium w-14",
           onPrimary
             ? loc === locale
               ? "bg-primary-content text-primary border-primary-content hover:bg-primary-content hover:border-primary-content"
@@ -33,7 +34,10 @@ const labels: Record<Locale, string> = { en: "EN", ja: "日本語" };
               : "btn-ghost border border-base-300",
         ]}
       >
-        {labels[loc]}
+        <span aria-hidden="true">{codes[loc]}</span>
+        <span class="sr-only" lang={loc}>
+          {endonyms[loc]}
+        </span>
       </a>
     ))
   }
