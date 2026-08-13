@@ -2,18 +2,31 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { localizePath, type Locale } from '../i18n/ui';
 
 export interface Props {
 	title: string;
 	description: string;
 	image?: string;
 	ogType?: string;
+	locale?: Locale;
+	basePath?: string;
 }
 
-const { title, description, image = '/og.png', ogType = 'website' } = Astro.props;
+const {
+	title,
+	description,
+	image = '/og.png',
+	ogType = 'website',
+	locale = 'en',
+	basePath = '/',
+} = Astro.props;
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
 
 const siteURL = Astro.site?.href ?? Astro.url.origin;
+const alternateEn = Astro.site ? new URL(localizePath('en', basePath), Astro.site) : undefined;
+const alternateJa = Astro.site ? new URL(localizePath('ja', basePath), Astro.site) : undefined;
+
 const personLd = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
@@ -48,12 +61,16 @@ const websiteLd = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{alternateEn && <link rel="alternate" hreflang="en" href={alternateEn} />}
+{alternateJa && <link rel="alternate" hreflang="ja" href={alternateJa} />}
+{alternateEn && <link rel="alternate" hreflang="x-default" href={alternateEn} />}
 
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:locale" content={locale === 'ja' ? 'ja_JP' : 'en_US'} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={Astro.url} />

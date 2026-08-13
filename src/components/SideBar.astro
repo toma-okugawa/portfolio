@@ -1,19 +1,22 @@
 ---
 import SideBarMenu from "./SideBarMenu.astro";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
 import { CONTACT_EMAIL, RESEARCHMAP_URL, ORCID_URL, GITHUB_URL } from "../config";
-const { sideBarActiveItemID } = Astro.props;
+import { useTranslations, type Locale } from "../i18n/ui";
+import { sidebarInterests } from "../data/entries";
 
-const researchInterests = [
-  "Pose Estimation",
-  "Motion Analysis",
-  "Self-Directed Learning Support",
-  "Real-Time Feedback",
-  "Sports Engineering",
-];
+interface Props {
+  sideBarActiveItemID?: string;
+  locale?: Locale;
+  basePath?: string;
+}
+
+const { sideBarActiveItemID, locale = "en", basePath = "/" } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <div class="drawer-side z-40 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-  <label for="my-drawer" class="drawer-overlay" aria-label="Close sidebar"></label>
+  <label for="my-drawer" class="drawer-overlay" aria-label={t("sidebar.closeLabel")}></label>
   <aside
     class="relative lg:m-4 lg:mr-0 rounded-none lg:rounded-2xl shadow-md px-6 pt-2 pb-10 w-80 max-w-full lg:max-w-none min-h-full lg:min-h-0 lg:h-[calc(100dvh-2rem)] lg:overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden bg-primary text-primary-content flex flex-col"
   >
@@ -26,26 +29,41 @@ const researchInterests = [
               width="300"
               height="300"
               src="/profile.webp"
-              alt="Portrait of Toma Okugawa"
+              alt={locale === "ja" ? "奥河 董馬の写真" : "Portrait of Toma Okugawa"}
             />
           </div>
         </div>
       </a>
     </div>
     <div class="text-center mb-2 px-2">
-      <div class="text-xl font-bold tracking-wider">Toma Okugawa</div>
-      <div class="text-sm text-primary-content/85" lang="ja">奥河 董馬</div>
-      <p class="text-sm tracking-wide text-primary-content/85 mt-2">Student Researcher</p>
-      <p class="text-xs text-primary-content/75 mt-0.5">NIT (KOSEN), Yuge College</p>
+      {
+        locale === "ja" ? (
+          <>
+            <div class="text-xl font-bold tracking-wider">奥河 董馬</div>
+            <div class="text-sm text-primary-content/85" lang="en">
+              Toma Okugawa
+            </div>
+          </>
+        ) : (
+          <>
+            <div class="text-xl font-bold tracking-wider">Toma Okugawa</div>
+            <div class="text-sm text-primary-content/85" lang="ja">
+              奥河 董馬
+            </div>
+          </>
+        )
+      }
+      <p class="text-sm tracking-wide text-primary-content/85 mt-2">{t("sidebar.tagline")}</p>
+      <p class="text-xs text-primary-content/75 mt-0.5">{t("sidebar.college")}</p>
     </div>
 
-    <div class="flex justify-center gap-3 mb-3">
+    <div class="flex justify-center gap-3 mb-2">
       <a
         href={`mailto:${CONTACT_EMAIL}`}
         onclick="openMailModal(); return false;"
         class="btn btn-circle btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary"
-        aria-label="Send an email"
-        title="Send an email"
+        aria-label={t("sidebar.mailLabel")}
+        title={t("sidebar.mailLabel")}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: currentColor;"
           ><path
@@ -58,8 +76,8 @@ const researchInterests = [
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-circle btn-ghost border border-primary-content/40 text-primary-content hover:bg-primary-content hover:border-primary-content hover:text-primary"
-        aria-label="researchmap profile"
-        title="researchmap profile"
+        aria-label={t("sidebar.researchmapLabel")}
+        title={t("sidebar.researchmapLabel")}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
           <text
@@ -75,7 +93,11 @@ const researchInterests = [
       </a>
     </div>
 
-    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <div class="flex justify-center mb-3">
+      <LocaleSwitcher locale={locale} basePath={basePath} onPrimary />
+    </div>
+
+    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} locale={locale} />
 
     <div class="text-left mt-6">
       <h3 class="text-xs font-bold uppercase tracking-widest border-b-2 border-primary-content/30 pb-1.5 mb-3">
@@ -88,7 +110,7 @@ const researchInterests = [
               d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
             ></path></svg
           >
-          <span>Ehime, Japan</span>
+          <span>{t("sidebar.location")}</span>
         </li>
         <li class="flex items-center gap-2.5">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="shrink-0 opacity-70" style="fill: currentColor;"
@@ -141,9 +163,9 @@ const researchInterests = [
       </h3>
       <ul class="flex flex-wrap gap-2">
         {
-          researchInterests.map((keyword) => (
+          sidebarInterests.map((keyword) => (
             <li class="bg-primary-content/10 border border-primary-content/25 rounded-full px-3 py-1 text-xs transition-colors hover:bg-primary-content/20">
-              {keyword}
+              {keyword[locale]}
             </li>
           ))
         }

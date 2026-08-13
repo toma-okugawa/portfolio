@@ -1,0 +1,32 @@
+---
+import Entry from "./Entry.astro";
+import type { EntryData } from "../../data/entries";
+import { useTranslations, type Locale } from "../../i18n/ui";
+
+interface Props {
+  entry: EntryData;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const t = useTranslations(locale);
+
+const entryProps = {
+  abstractLabel: t("entry.abstract"),
+  ongoingLabel: t("entry.ongoing"),
+  title: entry.title[locale],
+  meta: entry.meta?.[locale] || undefined,
+  date: entry.date?.[locale],
+  badges: (entry.badges ?? []).map((b) => b[locale]),
+  highlightBadges: (entry.highlightBadges ?? []).map((b) => b[locale]),
+  links: (entry.links ?? []).map((link) => ({ label: link.label[locale], url: link.url })),
+  url: entry.url,
+  lang: entry.titleLang?.[locale],
+  active: entry.active ?? false,
+  abstract: entry.abstract?.[locale],
+};
+
+const description = entry.description?.[locale] || undefined;
+---
+
+{description ? <Entry {...entryProps}>{description}</Entry> : <Entry {...entryProps} />}

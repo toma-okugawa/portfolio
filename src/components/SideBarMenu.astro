@@ -1,22 +1,32 @@
 ---
 import { CONTACT_EMAIL } from "../config";
-const { sideBarActiveItemID } = Astro.props;
+import { localizePath, useTranslations, type Locale } from "../i18n/ui";
+
+interface Props {
+  sideBarActiveItemID?: string;
+  locale?: Locale;
+}
+
+const { sideBarActiveItemID, locale = "en" } = Astro.props;
+const t = useTranslations(locale);
 const activeClass = "bg-primary-content !text-primary font-semibold";
 const itemClass =
   "py-2.5 text-base rounded-md text-primary-content hover:bg-primary-content/10 focus:bg-primary-content/15 focus:text-primary-content focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-content";
 ---
 
 <ul class="menu menu-md px-0">
-    <li><a class={itemClass} id="home" href="/">Home</a></li>
-    <li><a class={itemClass} id="cv" href="/cv">Curriculum Vitae</a></li>
-    <li><a class={itemClass} id="publications" href="/publications">Publications</a></li>
-    <li><a class={itemClass} id="projects" href="/projects">Projects</a></li>
+    <li><a class={itemClass} id="home" href={localizePath(locale, "/")}>{t("nav.home")}</a></li>
+    <li><a class={itemClass} id="cv" href={localizePath(locale, "/cv/")}>{t("nav.cv")}</a></li>
+    <li>
+        <a class={itemClass} id="publications" href={localizePath(locale, "/publications/")}>{t("nav.publications")}</a>
+    </li>
+    <li><a class={itemClass} id="projects" href={localizePath(locale, "/projects/")}>{t("nav.projects")}</a></li>
     <li>
         <a
             class={itemClass}
             id="contact"
             href={`mailto:${CONTACT_EMAIL}`}
-            referrerpolicy="no-referrer-when-downgrade">Contact</a
+            referrerpolicy="no-referrer-when-downgrade">{t("nav.contact")}</a
         >
     </li>
 </ul>

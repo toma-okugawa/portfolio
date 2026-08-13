@@ -6,31 +6,53 @@ import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import { ViewTransitions } from "astro:transitions";
 
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR, CONTACT_EMAIL, TRANSITION_API } from "../config";
+import { CONTACT_EMAIL, TRANSITION_API } from "../config";
+import { basePathOf, useTranslations, type Locale } from "../i18n/ui";
+
+interface Props {
+  image?: string;
+  title?: string;
+  description?: string;
+  includeSidebar?: boolean;
+  sideBarActiveItemID?: string;
+  ogType?: string;
+  locale?: Locale;
+}
 
 const {
   image,
   title,
-  description = SITE_DESCRIPTION,
+  description,
   includeSidebar = true,
   sideBarActiveItemID,
   ogType,
+  locale = "en",
 } = Astro.props;
 
-const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
+const t = useTranslations(locale);
+const basePath = basePathOf(Astro.url.pathname);
+const pageTitle = title ? `${title} | ${t("site.author")}` : t("site.title");
+const pageDescription = description ?? t("site.description");
 ---
 
 <!doctype html>
-<html lang="en" data-theme="resume">
+<html lang={locale} data-theme="resume">
   <head>
-    <BaseHead title={pageTitle} description={description} image={image} ogType={ogType} />
+    <BaseHead
+      title={pageTitle}
+      description={pageDescription}
+      image={image}
+      ogType={ogType}
+      locale={locale}
+      basePath={basePath}
+    />
     {TRANSITION_API && <ViewTransitions />}
   </head>
   <body>
     <div class="bg-base-200 drawer lg:drawer-open">
-      <input id="my-drawer" type="checkbox" class="drawer-toggle" aria-label="Open navigation menu" />
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" aria-label={t("header.drawerLabel")} />
       <div class="drawer-content bg-base-200 min-h-screen">
-        <Header title={SITE_AUTHOR} showMenuButton={includeSidebar} />
+        <Header showMenuButton={includeSidebar} locale={locale} basePath={basePath} />
         <div class="p-3 lg:p-4">
           <main
             class="bg-base-100 rounded-2xl shadow-sm w-full max-w-6xl mx-auto p-4 sm:p-6 md:p-10 min-h-[calc(100svh-7.5rem)] lg:min-h-[calc(100svh-9.5rem)]"
@@ -38,26 +60,26 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
             <slot />
           </main>
         </div>
-        <Footer />
+        <Footer locale={locale} />
       </div>
-      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} locale={locale} basePath={basePath} />}
     </div>
 
     <dialog id="mail-modal" class="modal" aria-labelledby="mail-modal-title">
       <div class="modal-box max-w-sm">
-        <h3 id="mail-modal-title" class="font-bold text-lg mb-3">Contact</h3>
-        <p class="text-sm text-base-content/70 mb-2">Send an email to:</p>
+        <h3 id="mail-modal-title" class="font-bold text-lg mb-3">{t("modal.title")}</h3>
+        <p class="text-sm text-base-content/70 mb-2">{t("modal.sendTo")}</p>
         <p class="font-mono text-sm bg-base-200 rounded px-3 py-2 mb-2 select-all break-all">{CONTACT_EMAIL}</p>
         <div class="modal-action mt-4 flex flex-wrap gap-2 justify-end">
           <form method="dialog">
-            <button class="btn btn-ghost">Cancel</button>
+            <button class="btn btn-ghost">{t("modal.cancel")}</button>
           </form>
-          <button class="btn btn-outline btn-primary" onclick="copyContactEmail()">Copy address</button>
-          <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>Open mail app</a>
+          <button class="btn btn-outline btn-primary" onclick="copyContactEmail()">{t("modal.copy")}</button>
+          <a class="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t("modal.open")}</a>
         </div>
       </div>
       <form method="dialog" class="modal-backdrop">
-        <button aria-label="Close">close</button>
+        <button aria-label={t("modal.cancel")}>close</button>
       </form>
     </dialog>
 
@@ -68,7 +90,14 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
     >
     </div>
 
-    <script is:inline define:vars={{ contactEmail: CONTACT_EMAIL }}>
+    <script
+      is:inline
+      define:vars={{
+        contactEmail: CONTACT_EMAIL,
+        copiedMessage: t("modal.copied"),
+        copyFailedMessage: t("modal.copyFailed"),
+      }}
+    >
       window.openMailModal = function () {
         const modal = document.getElementById("mail-modal");
         modal && modal.showModal();
@@ -85,10 +114,10 @@ const pageTitle = title ? `${title} | ${SITE_AUTHOR}` : SITE_TITLE;
         };
         navigator.clipboard.writeText(contactEmail).then(
           function () {
-            show("success", "Address copied!");
+            show("success", copiedMessage);
           },
           function () {
-            show("error", "Copy failed");
+            show("error", copyFailedMessage);
           }
         );
       };
