@@ -11,3 +11,9 @@ a {
 .btn-primary:focus-visible {
     outline-color: oklch(var(--p));
 }
+
+/* While the mobile drawer is open, hide the sticky header so its language
+   switcher does not float brightly next to the overlay (double EN/JA UI). */
+.drawer-toggle:checked ~ .drawer-content .site-header {
+    visibility: hidden;
+}
