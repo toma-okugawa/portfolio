@@ -17,3 +17,19 @@ a {
 .drawer-toggle:checked ~ .drawer-content .site-header {
     visibility: hidden;
 }
+
+/* daisyUI's drawer overlay is position:sticky inside the drawer's own
+   scroller, which leaves newly revealed page areas undimmed once either the
+   drawer content or the page scrolls. Pin it to the viewport instead, and
+   freeze the page behind the open drawer. (Mobile drawer only — at lg+ the
+   sidebar is permanently open and the overlay must stay inert.) */
+@media (max-width: 1023.98px) {
+    .drawer-side > .drawer-overlay {
+        position: fixed;
+        inset: 0;
+    }
+
+    body:has(.drawer-toggle:checked) {
+        overflow: hidden;
+    }
+}
