@@ -1,8 +1,24 @@
 name: Release Artifacts
 
+# 3つの経路で起動する:
+# - workflow_call: release-please ワークフローからの呼び出し (通常の自動リリース経路。
+#   GITHUB_TOKEN が発行した release イベントはワークフローを起動しないため、この経路が本線)
+# - release: GitHub UI から手動でリリースを公開した場合
+# - workflow_dispatch: 過去リリースへの手動バックフィル
 on:
   release:
     types: [published]
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "対象リリースのタグ (例: v1.0.1)"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -11,9 +27,13 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
     steps:
       - name: Checkout release tag
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.event.release.tag_name }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -33,10 +53,10 @@ jobs:
       - name: Archive built site
         run: |
           cd dist
-          zip -r "../site-${GITHUB_REF_NAME}.zip" .
+          zip -r "../site-${RELEASE_TAG}.zip" .
 
       - name: Attach archive to release
-        run: gh release upload "$GITHUB_REF_NAME" "site-${GITHUB_REF_NAME}.zip" --clobber
+        run: gh release upload "$RELEASE_TAG" "site-${RELEASE_TAG}.zip" --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -56,8 +76,8 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{version}},value=${{ inputs.tag || github.event.release.tag_name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag || github.event.release.tag_name }}
             type=raw,value=latest
 
       - name: Build and push container image
