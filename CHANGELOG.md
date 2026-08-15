@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/toma-okugawa/portfolio/compare/v1.0.2...v1.1.0) (2026-08-15)
+
+
+### 機能
+
+* サイドバーのリンク一覧に Speaker Deck を追加 ([ff669b3](https://github.com/toma-okugawa/portfolio/commit/ff669b34b17bcfcb9d97b3b4033208dbfdbddf01))
+* サイドバーのリンク一覧に Speaker Deck を追加 ([8349e08](https://github.com/toma-okugawa/portfolio/commit/8349e08fd85f0e4de83d455d0350975bab1fa328))
+
+
+### 修正
+
+* tsconfig から非推奨の baseUrl と未使用のパスエイリアスを削除 ([0c45c2f](https://github.com/toma-okugawa/portfolio/commit/0c45c2f859708be78346916635be8f0caebda337))
+* tsconfig から非推奨の baseUrl と未使用のパスエイリアスを削除 ([8f39546](https://github.com/toma-okugawa/portfolio/commit/8f395466c1daee52019f4f04b7a33038ef3020a2))
+
 ## [1.0.2](https://github.com/toma-okugawa/portfolio/compare/v1.0.1...v1.0.2) (2026-08-15)
 
 
