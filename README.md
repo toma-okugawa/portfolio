@@ -49,6 +49,34 @@ Cloudflare ダッシュボードで本リポジトリを接続し、以下を設
 - PR は GitHub Actions の CI (`build`) が通ることがマージ条件です
 - コミットは [Conventional Commits](https://www.conventionalcommits.org/) 形式 (`feat:` / `fix:` / `chore:` など)
 
+## リリース (Releases)
+
+[release-please](https://github.com/googleapis/release-please-action) による自動リリース管理です。
+
+1. main へのマージが積まれると、release-please が **リリース PR** (バージョン更新 + CHANGELOG) を自動作成・更新します
+2. リリース PR をマージすると、**タグ + GitHub Release が自動作成**されます
+3. バージョンは Conventional Commits から自動決定 (`feat:` → minor / `fix:` → patch)
+
+> **Note**: リリース PR は GITHUB_TOKEN で作られるため CI が自動起動しません。PR を一度 **Close → Reopen** すると `build` チェックが走ります (恒久対応する場合は PAT を Actions シークレットに登録して workflow の `token` に渡してください)。
+
+## パッケージ (Packages)
+
+Release の公開をトリガーに、ビルド済みサイトが2形態で自動配布されます:
+
+| 形態 | 場所 |
+| --- | --- |
+| `site-vX.Y.Z.zip` (dist 一式) | Release のアセット |
+| コンテナイメージ (nginx 配信) | `ghcr.io/toma-okugawa/portfolio` (`latest` / `X.Y.Z` / `X.Y`) |
+
+任意のリリース時点のサイトをローカルで再現できます:
+
+```bash
+docker run --rm -p 8080:80 ghcr.io/toma-okugawa/portfolio:latest
+# → http://localhost:8080
+```
+
+> **Note**: 初回 push 時のパッケージは private です。公開する場合はパッケージ設定 → Danger Zone → Change visibility から Public に変更してください (一度 Public にすると Private へは戻せません)。
+
 ## ライセンス
 
 一部のコードは MIT ライセンスの OSS に由来します。詳細は [LICENSE](LICENSE) を参照してください。

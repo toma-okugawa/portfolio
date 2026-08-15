@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "3d6eaf98b853d2c9d2e77e61dee5b30ce69ff236",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "include-component-in-tag": false,
+      "changelog-sections": [
+        { "type": "feat", "section": "機能" },
+        { "type": "fix", "section": "修正" },
+        { "type": "style", "section": "スタイル" },
+        { "type": "refactor", "section": "リファクタリング" },
+        { "type": "docs", "section": "ドキュメント" },
+        { "type": "chore", "section": "その他" }
+      ]
+    }
+  }
+}
