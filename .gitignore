@@ -32,3 +32,6 @@ compare/
 
 # local source assets not meant for deployment (original photos, etc.)
 assets-src/
+
+# nested clone of the GitHub profile repository (separate repo)
+toma-okugawa/
