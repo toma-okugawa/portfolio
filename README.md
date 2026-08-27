@@ -24,7 +24,7 @@
 - **Structured data** — `Person` and `WebSite` JSON-LD with `sameAs` links to researchmap, ORCID, J-GLOBAL, GitHub, and Speaker Deck
 - **Academic CV pages** — publications, awards, projects, and a full CV, sourced from a [researchmap](https://researchmap.jp/t_okugawa) export that is kept out of the repository
 - **Fully static** — no client-side framework; all CSS is inlined at build time so nothing render-blocking is fetched
-- **Release automation** — [release-please](https://github.com/googleapis/release-please-action) turns Conventional Commits into a versioned GitHub Release, a `site-vX.Y.Z.zip`, and an nginx container image on `ghcr.io`
+- **Release artifacts** — publishing a GitHub Release builds a `site-vX.Y.Z.zip` and an nginx container image on `ghcr.io`
 - **Hardened delivery** — `X-Frame-Options`, `Permissions-Policy`, `Referrer-Policy`, and `X-Content-Type-Options` via Cloudflare Pages `_headers`
 
 ## Quick start
@@ -99,18 +99,12 @@ Cloudflare ダッシュボードで本リポジトリを接続し、以下を設
 - `main` への直接 push は禁止 (ブランチ保護 ruleset)。変更は必ずブランチ → Pull Request 経由で行います
 - PR 本文の `Closes #N` で対応 Issue を紐付け、マージと同時にクローズします
 - PR は GitHub Actions の CI (`build`) が通ることがマージ条件です
-- コミットは [Conventional Commits](https://www.conventionalcommits.org/) 形式 (`feat:` / `fix:` / `chore:` など)
+- コミットは [Conventional Commits](https://www.conventionalcommits.org/) 形式 (`feat:` / `fix:` / `chore:` など) を推奨
 - 依存関係の更新は Dependabot が毎週月曜に PR を作成します (`chore(deps)` / `chore(ci)`)
 
 ### リリース (Releases)
 
-[release-please](https://github.com/googleapis/release-please-action) による自動リリース管理です。
-
-1. main へのマージが積まれると、release-please が **リリース PR** (バージョン更新 + CHANGELOG) を自動作成・更新します
-2. リリース PR をマージすると、**タグ + GitHub Release が自動作成**されます
-3. バージョンは Conventional Commits から自動決定 (`feat:` → minor / `fix:` → patch)
-
-> **Note**: リリース PR は GITHUB_TOKEN で作られるため CI が自動起動しません。PR を一度 **Close → Reopen** すると `build` チェックが走ります (恒久対応する場合は PAT を Actions シークレットに登録して workflow の `token` に渡してください)。
+リリースは GitHub の **Releases → Draft a new release** から手動で作成します (タグは `vX.Y.Z`)。公開すると `release-artifacts.yml` が起動し、`site-vX.Y.Z.zip` と ghcr.io のコンテナイメージを自動配布します。過去の変更履歴は [CHANGELOG.md](CHANGELOG.md) を参照してください (v1.1.0 までは release-please で自動生成していました)。
 
 ### パッケージ (Packages)
 
