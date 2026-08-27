@@ -19,7 +19,8 @@ const t = useTranslations(locale);
     <div class="navbar-start">
       {
         showMenuButton && (
-          <label for="my-drawer" class="btn btn-square btn-ghost drawer-button" aria-label={t("header.menuLabel")}>
+          <label for="my-drawer" class="btn btn-square btn-ghost drawer-button">
+            <span class="sr-only">{t("header.menuLabel")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

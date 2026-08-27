@@ -16,7 +16,7 @@ const t = useTranslations(locale);
 ---
 
 <div class="drawer-side z-50 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-  <label for="my-drawer" class="drawer-overlay" aria-label={t("sidebar.closeLabel")}></label>
+  <label for="my-drawer" class="drawer-overlay"><span class="sr-only">{t("sidebar.closeLabel")}</span></label>
   <aside
     class="relative lg:m-4 lg:mr-0 rounded-none lg:rounded-2xl shadow-md px-6 pt-2 pb-10 w-80 max-w-full lg:max-w-none min-h-full lg:min-h-0 lg:h-[calc(100dvh-2rem)] lg:overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden bg-primary text-primary-content flex flex-col"
   >
