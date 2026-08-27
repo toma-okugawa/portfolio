@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.1](https://github.com/toma-okugawa/portfolio/compare/v1.1.0...v1.1.1) (2026-08-27)
+
+
+### 修正
+
+* **a11y:** replace aria-label on &lt;label&gt; elements with visually hidden text ([b680df3](https://github.com/toma-okugawa/portfolio/commit/b680df3e9c3ec8b2f21b996583f91d10d64e3703))
+
+
+### ドキュメント
+
+* English README with screenshot and Astrofy attribution ([18f7629](https://github.com/toma-okugawa/portfolio/commit/18f762902e1a74d1b292134cd023a96665d41dfb))
+
+
+### その他
+
+* add own copyright notice to LICENSE ([045d25f](https://github.com/toma-okugawa/portfolio/commit/045d25fd0f65a6511c74cf2fb97229a2e3206a75))
+* **ci:** add Dependabot for npm and GitHub Actions ([27c5b3b](https://github.com/toma-okugawa/portfolio/commit/27c5b3b34650c337d430e8b4cd7caa4df13f4067))
+* site polish — inline CSS, a11y fix, README, Dependabot ([db1c952](https://github.com/toma-okugawa/portfolio/commit/db1c952d5549ee31d3ecf4819b11d3d3d2c06a7c))
+
 ## [1.1.0](https://github.com/toma-okugawa/portfolio/compare/v1.0.2...v1.1.0) (2026-08-15)
 
 
