@@ -1,8 +1,8 @@
 name: Release Artifacts
 
 # 3つの経路で起動する:
-# - workflow_call: release-please ワークフローからの呼び出し (通常の自動リリース経路。
-#   GITHUB_TOKEN が発行した release イベントはワークフローを起動しないため、この経路が本線)
+# - workflow_call: 他のワークフローからの呼び出し用 (release-please を使っていた頃の経路。
+#   GITHUB_TOKEN が発行した release イベントはワークフローを起動しないため残している)
 # - release: GitHub UI から手動でリリースを公開した場合
 # - workflow_dispatch: 過去リリースへの手動バックフィル
 on:
