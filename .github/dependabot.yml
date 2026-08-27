@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # npm 依存。minor / patch はまとめて1本の PR にし、major は個別に出す
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "chore(deps)"   # Conventional Commits (release-please の「その他」セクション)
+    labels:
+      - dependencies
+
+  # GitHub Actions のバージョン更新
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    commit-message:
+      prefix: "chore(ci)"
+    labels:
+      - dependencies
